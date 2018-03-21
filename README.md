@@ -9,7 +9,7 @@ A tiny JavaScript plugin for accessible multi-level dropdown menus
 #### Webpack environment
 
 ```js
-import accessibleNav from 'accessibleNav'
+import accessibleNav from 'accessiblenav.js'
 ```
 
 #### Old-school way
