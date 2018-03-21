@@ -1,20 +1,26 @@
 // TODO: supercharge with keyboard arrows
 
-import 'element-closest'
-
-(function (root, factory) {
-  const pluginName = 'accessibleNav'
-
-	if(typeof define === 'function' && define.amd) {
-		define([], () => factory(root))
-	}
-  else if(typeof exports === 'object') {
-		module.exports = factory(root)
-	}
+(function(window, factory) {
+  'use strict'
+  if(typeof define === 'function' && define.amd) {
+    define([
+        'element-closest',
+      ],
+      function() {
+        return factory(window)
+      }
+    );
+  }
+  else if(typeof module == 'object' && module.exports) {
+    module.exports = factory(
+      window,
+      require('element-closest')
+    )
+  }
   else {
-		root[pluginName] = factory(root)
-	}
-})(typeof global !== 'undefined' ? global : typeof window !== 'undefined' ? window : this, function(window) {
+    window.accessibleNav = factory(window)
+  }
+}(window, function factory(window) {
 
 	'use strict'
   window
@@ -31,7 +37,7 @@ import 'element-closest'
 
   // the plugin's object
 
-  const Plugin = (containerEl, optionsNew) => {
+  const Plugin = function(containerEl, optionsNew) {
 
     // instance variables
 
@@ -137,4 +143,4 @@ import 'element-closest'
 	}
 
 	return Plugin
-})
+}))

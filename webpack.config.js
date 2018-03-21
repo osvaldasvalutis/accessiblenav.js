@@ -23,11 +23,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new CopyWebpackPlugin([
-      {from: 'dist', to: 'demo' }
-    ])
-  ],
+  // plugins: [
+  //   new CopyWebpackPlugin([
+  //     {from: 'dist', to: 'demo' }
+  //   ])
+  // ],
   devServer: {
     contentBase: './demo',
     overlay: {
