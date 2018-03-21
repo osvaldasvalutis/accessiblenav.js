@@ -1,5 +1,3 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-
 module.exports = {
   module: {
     rules: [
@@ -23,11 +21,6 @@ module.exports = {
       }
     ]
   },
-  // plugins: [
-  //   new CopyWebpackPlugin([
-  //     {from: 'dist', to: 'demo' }
-  //   ])
-  // ],
   devServer: {
     contentBase: './demo',
     overlay: {
