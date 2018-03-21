@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 2em;
+		}
+
+		/* common */
+
+		.nav ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.nav ul ul {
+			display: none;
+			position: absolute;
+		}
+
+		.nav li {
+			background-color: grey;
+		}
+
+		.nav li:hover > ul {
+			display: block;
+		}
+
+		.nav .--active > ul {
+			display: block;
+		}
+
+		.nav .--has-child {
+			position: relative;
+		}
+
+		.nav .--has-child > a {
+			background-color: green;
+		}
+
+		.nav a {
+			display: block;
+			padding: 1em;
+			text-decoration: none;
+			color: white;
+		}
+
+		.nav li:hover > a {
+			background-color: rgba(0, 0, 0, .3);
+		}
+
+		/* 1st level */
+
+		.nav > ul {
+			display: flex;
+		}
+
+		.nav > ul > li {
+			flex: 1;
+			text-align: center;
+		}
+
+		.nav > ul > li + li {
+			border-left: 1px solid white;
+		}
+
+		/* >= 2nd level */
+
+		.nav ul ul {
+			min-width: 100%;
+			top: 100%;
+			left: 0;
+			box-shadow: 0 0.5em 1em rgba(0, 0, 0, .3);
+		}
+
+		.nav ul ul li + li {
+			border-top: 1px solid white;
+		}
+
+		/*  >3rd level */
+
+		.nav ul ul ul {
+			left: 1em;
+		}
+
+	</style>
+</header>
+<body>
+	<nav class="nav" role="navigation">
+		<ul>
+			<li>
+				<a href="/">Item</a>
+			</li>
+
+			<li class="--has-child">
+				<a href="/">Item</a>
+
+				<ul>
+					<li>
+						<a href="/">Item</a>
+					</li>
+
+					<li>
+						<a href="/">Item</a>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<a href="/">Item</a>
+			</li>
+
+			<li class="--has-child">
+				<a href="/">Item</a>
+
+				<ul>
+					<li>
+						<a href="/">Item</a>
+					</li>
+
+					<li class="--has-child">
+						<a href="/">Item</a>
+
+						<ul>
+							<li>
+								<a href="/">Item</a>
+							</li>
+
+							<li>
+								<a href="/">Item</a>
+							</li>
+
+							<li class="--has-child">
+								<a href="/">Item</a>
+
+								<ul>
+									<li>
+										<a href="/">Item</a>
+									</li>
+
+									<li>
+										<a href="/">Item</a>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<a href="/">Item</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="/">Item</a>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<a href="/">Item</a>
+			</li>
+		</ul>
+	</nav>
+
+	<script src="/main.js"></script>
+	<script>
+		accessibleNav(document.querySelector('.nav'), {
+			enableClicks: false
+		})
+	</script>
+</body>
+</html>
