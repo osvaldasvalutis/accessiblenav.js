@@ -1,6 +1,6 @@
 {
   "name": "accessiblenav.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tiny JavaScript plugin for accessible multi-level dropdown menus",
   "main": "src/index.js",
   "repository": "git@github.com:osvaldasvalutis/accessiblenav.js.git",
