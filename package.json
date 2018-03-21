@@ -1,6 +1,6 @@
 {
   "name": "accessiblenav.js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A tiny JavaScript plugin for accessible multi-level dropdown menus",
   "main": "src/index.js",
   "repository": "git@github.com:osvaldasvalutis/accessiblenav.js.git",
@@ -16,7 +16,6 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "copy-webpack-plugin": "^4.5.1",
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",

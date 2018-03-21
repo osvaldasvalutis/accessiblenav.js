@@ -4,7 +4,13 @@ A tiny JavaScript plugin for accessible multi-level dropdown menus
 
 ## Usage
 
-### Including script
+### Install
+
+Available as NPM package:
+
+```$ yarn add accessiblenav.js```
+
+### Include
 
 #### Webpack environment
 
@@ -18,7 +24,7 @@ import accessibleNav from 'accessiblenav.js'
 <script src="dist/main.js"></script>
 ```
 
-### Initiating plugin
+### Initiate
 
 ```js
 const nav = document.querySelector('.nav')
