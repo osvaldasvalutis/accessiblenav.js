@@ -21,7 +21,7 @@ import accessibleNav from 'accessiblenav.js'
 #### Old-school way
 
 ```html
-<script src="dist/main.js"></script>
+<script src="dist/index.min.js"></script>
 ```
 
 ### Initiate
@@ -41,6 +41,6 @@ accessibleNav(nav, {
 ## Development
 
 1. `$ yarn`
-2. `$ yarn start` or `$ yarn start-prod`
+2. `$ yarn dev`
 3. Edit plugin at `/src/index.js`, edit demo(s) at `/demo`
 4. Build with `$ yarn build` when done
