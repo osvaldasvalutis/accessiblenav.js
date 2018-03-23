@@ -77,11 +77,11 @@
       addClassesUpTheTree(e.target)
     }
 
-    const onButtonMouseenter = (e) => {
+    const onItemMouseenter = (e) => {
       addClassesUpTheTree(e.target)
     }
 
-    const onButtonMouseleave = () => {
+    const onItemMouseleave = () => {
       removeAllActiveClasses()
     }
 
@@ -131,7 +131,10 @@
 		publicMethods.destroy = () => { // destroy plugin, deassign tasks
       isInited = false
       removeAllActiveClasses()
-      containerEl.classList.remove(options.classEnabled)
+
+      if(options.classEnabled) {
+        containerEl.classList.remove(options.classEnabled)
+      }
 
       // TODO: use kollegorna/js-utils/event/addEventListener to minify this
       // code with event namespaces
@@ -141,8 +144,9 @@
         }
 
         if(options.mouseover) {
-          button.removeEventListener('mouseenter', onButtonMouseenter)
-          button.removeEventListener('mouseleave', onButtonMouseleave)
+          const item = button.closest(options.selItem)
+          item.removeEventListener('mouseenter', onItemMouseenter)
+          item.removeEventListener('mouseleave', onItemMouseleave)
         }
 
         if(options.keypress) {
@@ -173,8 +177,9 @@
         }
 
         if(options.mouseover) {
-          button.addEventListener('mouseenter', onButtonMouseenter)
-          button.addEventListener('mouseleave', onButtonMouseleave)
+          const item = button.closest(options.selItem)
+          item.addEventListener('mouseenter', onItemMouseenter)
+          item.addEventListener('mouseleave', onItemMouseleave)
         }
 
         if(options.keypress) {
@@ -190,7 +195,9 @@
         document.addEventListener('keyup', onDocumentKeyup)
       }
 
-      containerEl.classList.add(options.classEnabled)
+      if(options.classEnabled) {
+        containerEl.classList.add(options.classEnabled)
+      }
 		}
 
 		publicMethods.init(optionsNew)
