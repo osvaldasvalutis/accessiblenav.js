@@ -1,4 +1,4 @@
-// TODO: supercharge with keyboard arrows
+// TODO: supercharge with keyboard arrow presses
 
 (function(window, factory) {
   'use strict'
@@ -10,7 +10,7 @@
       function() {
         return factory(window)
       }
-    );
+    )
   }
   else if(typeof module == 'object' && module.exports) {
     module.exports = factory(
@@ -33,7 +33,12 @@
     selItem: 'li',
     selButton: 'a',
     classItemActive: '--active',
-    enableClicks: true,
+    classEnabled: '--jsfied',
+    click: true,
+    mouseover: true,
+    keypress: true,
+    outsideClick: true,
+    escPress: true,
   }
 
   // the plugin's object
@@ -58,14 +63,26 @@
       }
     }
 
-    const onButtonFocus = (e) => { // keyboard navigation
-      if(e.keyCode != 9) return
-      removeAllActiveClasses()
-      let parentItem = e.target.closest(options.selItem)
+    const addClassesUpTheTree = (button) => {
+      let parentItem = button.closest(options.selItem)
       while(parentItem) {
         parentItem.classList.add(options.classItemActive)
         parentItem = parentItem.parentNode.closest(options.selItem)
       }
+    }
+
+    const onButtonKeyup = (e) => {
+      if(e.keyCode != 9) return
+      removeAllActiveClasses()
+      addClassesUpTheTree(e.target)
+    }
+
+    const onButtonMouseenter = (e) => {
+      addClassesUpTheTree(e.target)
+    }
+
+    const onButtonMouseleave = () => {
+      removeAllActiveClasses()
     }
 
     const onButtonClick = (e) => {
@@ -104,20 +121,43 @@
       }
     }
 
+    const onDocumentKeyup = (e) => { // remove all active classes on ESC key press
+      if(e.keyCode != 27) return
+      removeAllActiveClasses()
+    }
+
     // instance public methods
 
 		publicMethods.destroy = () => { // destroy plugin, deassign tasks
       isInited = false
+      removeAllActiveClasses()
+      containerEl.classList.remove(options.classEnabled)
 
+      // TODO: use kollegorna/js-utils/event/addEventListener to minify this
+      // code with event namespaces
       buttons.forEach((button) => {
-        button.removeEventListener('keyup', onButtonFocus)
-
-        if(options.enableClicks) {
+        if(options.click) {
           button.removeEventListener('click', onButtonClick)
+        }
+
+        if(options.mouseover) {
+          button.removeEventListener('mouseenter', onButtonMouseenter)
+          button.removeEventListener('mouseleave', onButtonMouseleave)
+        }
+
+        if(options.keypress) {
+          button.removeEventListener('keyup', onButtonKeyup)
         }
       })
 
-      document.removeEventListener('click', onDocumentClick)
+      if(options.outsideClick) {
+        document.removeEventListener('click', onDocumentClick)
+      }
+
+      if(options.escPress) {
+        document.removeEventListener('keyup', onDocumentKeyup)
+      }
+      // ---
 		}
 
 		publicMethods.init = (optionsNew) => { // init plugin, assign tasks
@@ -128,14 +168,29 @@
       buttons = containerEl.querySelectorAll(options.selButton)
 
       buttons.forEach((button) => {
-        button.addEventListener('keyup', onButtonFocus)
-
-        if(options.enableClicks) {
+        if(options.click) {
           button.addEventListener('click', onButtonClick)
+        }
+
+        if(options.mouseover) {
+          button.addEventListener('mouseenter', onButtonMouseenter)
+          button.addEventListener('mouseleave', onButtonMouseleave)
+        }
+
+        if(options.keypress) {
+          button.addEventListener('keyup', onButtonKeyup)
         }
       })
 
-      document.addEventListener('click', onDocumentClick)
+      if(options.outsideClick) {
+        document.addEventListener('click', onDocumentClick)
+      }
+
+      if(options.escPress) {
+        document.addEventListener('keyup', onDocumentKeyup)
+      }
+
+      containerEl.classList.add(options.classEnabled)
 		}
 
 		publicMethods.init(optionsNew)

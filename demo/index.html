@@ -9,6 +9,10 @@
 			padding: 2em;
 		}
 
+        .destroy {
+            margin-top: 3em;
+        }
+
 		/* common */
 
 		.nav ul {
@@ -26,7 +30,7 @@
 			background-color: grey;
 		}
 
-		.nav li:hover > ul {
+		.nav:not(.--jsfied) li:hover > ul {
 			display: block;
 		}
 
@@ -166,12 +170,22 @@
 		</ul>
 	</nav>
 
+    <button class="destroy" type="button">
+        Destroy
+    </button>
+
 	<script src="/dist/index.js"></script>
 	<script>
-        // alert(typeof window.accessibleNav);
-		accessibleNav(document.querySelector('.nav'), {
-			enableClicks: false
-		});
+        var nav = document.querySelector('.nav');
+		var Nav = accessibleNav(nav);
+        var btnDestroy = document.querySelector('.destroy');
+
+        btnDestroy.addEventListener('click', function(e) {
+            e.preventDefault();
+            Nav.destroy();
+            btnDestroy.parentNode.removeChild(btnDestroy)
+            alert('Destroyed!')
+        })
 	</script>
 </body>
 </html>
