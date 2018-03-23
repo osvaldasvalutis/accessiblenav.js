@@ -34,7 +34,12 @@ accessibleNav(nav, {
   selItem: 'li',
   selButton: 'a',
   classItemActive: '--active',
-  enableClicks: true,
+  classEnabled: '--jsfied',
+  click: true,
+  mouseover: true,
+  keypress: true,
+  outsideClick: true,
+  escPress: true,
 })
 ```
 
